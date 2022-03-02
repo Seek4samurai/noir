@@ -1,38 +1,23 @@
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import { Image, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import 'react-native-gesture-handler';
-import { HomeScreen, LoginScreen, RegistrationScreen } from './src/screens';
-
-import { decode, encode } from 'base-64';
-if (!global.btoa) {
-  global.btoa = encode
-}
-if (!global.atob) {
-  global.atob = decode
-}
+import Onboarding from './screens/Onboarding';
+import LoginScreen from './screens/LoginScreen';
 
 const Stack = createStackNavigator();
 
-export default function App() {
-
-  const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState(null)
-
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {user ? (
-          <Stack.Screen name="Home">
-            {props => <HomeScreen {...props} extraData={user} />}
-          </Stack.Screen>
-        ) : (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
-          </>
-        )}
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name='OnBoarding' component={Onboarding}></Stack.Screen>
+        <Stack.Screen name='LoginScreen' component={LoginScreen}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
+
+export default App;
