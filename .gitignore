@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# firebase temporarily
+firebase.js
+
 # testing
 /coverage
 
@@ -26,6 +29,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
+.env
 .env.local
 .env.development.local
 .env.test.local

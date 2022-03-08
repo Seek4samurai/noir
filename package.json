@@ -9,9 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "email-validator": "^2.0.4",
+    "firebase": "^9.6.8",
     "next": "12.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^5.0.3",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "eslint": "8.10.0",
