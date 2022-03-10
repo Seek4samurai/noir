@@ -1,10 +1,11 @@
 import { Avatar, Button, IconButton } from '@material-ui/core';
-import { AddCircleOutline, Chat, MoreVert, Receipt, Search } from '@material-ui/icons';
+import { AddCircleOutline, Chat, MoreVert, Search } from '@material-ui/icons';
 import * as EmailValidator from 'email-validator';
 import styled from 'styled-components';
 import { auth, db } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
+import UserChat from './UserChat';
 
 const Sidebar = () => {
     const [user] = useAuthState(auth);
@@ -24,36 +25,42 @@ const Sidebar = () => {
     // checking if chat already exists or not
     const chatExist = (recipientEmail) =>
         !!chatSnapshot?.docs.find(
-            (chat) => chat.data().users.find(
-                (user) => user === recipientEmail
-            )?.length > 0
+            (chat) => chat.data().users.find((user) => user === recipientEmail)?.length > 0
         );
 
-    return <Container>
-        <Header>
-            <UserAvatar onClick={() => { auth.signOut() }}></UserAvatar>
-            <IconContainer>
-                <IconButton>
-                    <Chat></Chat>
-                </IconButton>
-                <IconButton>
-                    <MoreVert></MoreVert>
-                </IconButton>
-            </IconContainer>
-        </Header>
-        <Footer>
-            <SearchContainer>
-                <Search></Search>
-                <SearchInput placeholder='Search in chats'></SearchInput>
-            </SearchContainer>
-            <SidebarButton onClick={createChat}>
-                <AddCircleOutline fontSize='large'></AddCircleOutline>
-            </SidebarButton>
-
-            {/* List of chats to be placed here */}
-
-        </Footer>
-    </Container>;
+    return (
+        <Container>
+            <Header>
+                <UserAvatar src={user.photoURL} onClick={() => { auth.signOut() }}></UserAvatar>
+                <IconContainer>
+                    <IconButton>
+                        <Chat></Chat>
+                    </IconButton>
+                    <IconButton>
+                        <MoreVert></MoreVert>
+                    </IconButton>
+                </IconContainer>
+            </Header>
+            <Footer>
+                <SearchContainer>
+                    <Search></Search>
+                    <SearchInput placeholder='Search in chats'></SearchInput>
+                </SearchContainer>
+                <UsersContainer>
+                    <AddButton>
+                        <SidebarButton onClick={createChat}>
+                            <AddCircleOutline fontSize='large'></AddCircleOutline>
+                        </SidebarButton>
+                        <h4>Add</h4>
+                    </AddButton>
+                    {/* List of chats to be placed here */}
+                    {chatSnapshot?.docs.map((chat) => (
+                        <UserChat key={chat.id} id={chat.id} users={chat.data().users}></UserChat>
+                    ))}
+                </UsersContainer>
+            </Footer>
+        </Container>
+    )
 };
 
 export default Sidebar;
@@ -90,7 +97,7 @@ const Footer = styled.div`
     justify-content: center;
     align-items: center;
     flex: 1;
-    position: absolute;
+    ${'' /* position: absolute; */}
     bottom: 0;
     width: 100%;
 `;
@@ -105,6 +112,14 @@ const SearchInput = styled.input`
     border: none;
     outline-width: 0px;
 `;
+const UsersContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
 const SidebarButton = styled(Button)`
     min-width: 0;
+`;
+const AddButton = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
