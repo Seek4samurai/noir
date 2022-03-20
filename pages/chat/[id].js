@@ -3,7 +3,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import ChatScreen from "../../components/ChatScreen";
 import Sidebar from "../../components/Sidebar";
-import { db } from "../../firebase";
+import getEmail from "../../utils/getEmail";
+import { auth, db } from "../../firebase";
 
 const Container = styled.div`
   display: flex;
@@ -21,15 +22,17 @@ const ChatContainer = styled.div`
 
 const Chat = ({ chat, messages }) => {
   const [user] = useAuthState(auth);
+  const userName = getEmail(chat.users, user).split("@");
+  //   console.log(userName);
 
   return (
     <Container>
       <Head>
-        <title>Chat with {}</title>
+        <title>Chat with {userName[0]}</title>
       </Head>
       <Sidebar></Sidebar>
       <ChatContainer>
-        <ChatScreen></ChatScreen>
+        <ChatScreen chat={chat} messages={messages}></ChatScreen>
       </ChatContainer>
     </Container>
   );

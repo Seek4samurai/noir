@@ -9,8 +9,10 @@ import { useRouter } from "next/router";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   word-break: break-word;
-  padding: 0.5rem;
+  padding: 0 1rem;
   cursor: pointer;
   :hover {
     background-color: #e9eaeb;
@@ -18,7 +20,7 @@ const Container = styled.div`
 `;
 const UserImage = styled(Avatar)`
   margin: 5px;
-  margin-right: 15px;
+  transform: scale(1.2);
 `;
 
 const UserChat = ({ id, users }) => {
