@@ -73,6 +73,7 @@ const Header = styled.div`
     position: sticky;
     top: 0;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: white;
@@ -97,7 +98,7 @@ const Footer = styled.div`
     justify-content: center;
     align-items: center;
     flex: 1;
-    ${'' /* position: absolute; */}
+    position: absolute;
     bottom: 0;
     width: 100%;
 `;
