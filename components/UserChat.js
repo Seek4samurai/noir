@@ -24,17 +24,13 @@ const UserImage = styled(Avatar)`
 `;
 
 const UserChat = ({ id, users }) => {
-  // console.log(users);
   const router = useRouter();
   const [user] = useAuthState(auth);
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getEmail(users, user))
   );
   const recipient = recipientSnapshot?.docs?.[0]?.data();
-  // console.log(recipient);
   const recipientEmail = getEmail(users, user);
-  // console.log(recipientEmail);
-  // console.log(recipient);
 
   const enterChat = () => {
     router.push(`/chat/${id}`);

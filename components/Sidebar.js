@@ -90,7 +90,7 @@ const Header = styled.div`
   align-items: center;
   background-color: white;
   padding: 1rem;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   border-bottom: 3px solid whitesmoke;
   z-index: 1;
@@ -127,12 +127,13 @@ const SearchInput = styled.input`
 const UsersContainer = styled.div`
   display: flex;
   flex-direction: row;
+  /* overflow: hidden; */
 `;
 const SidebarButton = styled(Button)`
   min-width: 0;
 `;
 const AddButton = styled.div`
-  transform: scale(2);
+  /* transform: scale(2); */
   display: flex;
   flex-direction: column;
   justify-content: center;

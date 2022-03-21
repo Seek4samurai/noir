@@ -16,6 +16,7 @@
 /build
 
 # misc
+firebase.js
 .DS_Store
 *.pem
 
