@@ -54,9 +54,11 @@ const MessageContainer = styled.div`
   padding: 30px;
   min-height: 65vh;
   background-color: #e5ded8;
+  z-index: 100;
 `;
 
 const EndMessages = styled.div``;
+
 const InputContainer = styled.form`
   display: flex;
   align-items: center;
@@ -65,6 +67,7 @@ const InputContainer = styled.form`
   bottom: 0;
   z-index: 100;
 `;
+
 const Input = styled.input`
   flex: 1;
   outline: 0;
@@ -94,7 +97,8 @@ const ChatScreen = ({ chat, messages }) => {
 
   const showMessages = () => {
     if (messagesSnapShot) {
-      return messagesSnapShot.docs.map((message) => {
+      // console.log("if");
+      return messagesSnapShot.docs.map((message) => (
         <Message
           key={message.id}
           user={message.data().user}
@@ -102,16 +106,13 @@ const ChatScreen = ({ chat, messages }) => {
             ...message.data(),
             timestamp: message.data().timestamp?.toDate().getTime(),
           }}
-        />;
-      });
+        />
+      ));
     } else {
-      return JSON.parse(messages).map((message) => {
-        <Message
-          key={message.id}
-          user={message.user}
-          message={message}
-        ></Message>;
-      });
+      // console.log("else");
+      return JSON.parse(messages).map((message) => (
+        <Message key={message.id} user={message.user} message={message} />
+      ));
     }
   };
 
@@ -133,6 +134,7 @@ const ChatScreen = ({ chat, messages }) => {
     });
     setInput("");
   };
+  // console.log(messages);
 
   return (
     <Container>
@@ -150,7 +152,7 @@ const ChatScreen = ({ chat, messages }) => {
         </HeaderIcons>
       </Header>
       <MessageContainer>
-        {/* {showMessages()} */}
+        {showMessages()}
         <EndMessages></EndMessages>
       </MessageContainer>
       <InputContainer>
