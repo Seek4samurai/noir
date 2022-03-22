@@ -8,6 +8,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 import Message from "./Message";
+import getEmail from "../utils/getEmail";
+import TimeAgo from "timeago-react";
 
 const Container = styled.div`
   /* height: 80px; */
@@ -83,6 +85,8 @@ const Input = styled.input`
 
 const ChatScreen = ({ chat, messages }) => {
   const [user] = useAuthState(auth);
+  // console.log(chat);
+  // console.log(messages);
   const [input, setInput] = useState("");
   const router = useRouter();
   const userName = chat.users[1].split("@")[0];
@@ -94,6 +98,12 @@ const ChatScreen = ({ chat, messages }) => {
       .collection("messages")
       .orderBy("timestamp", "asc")
   );
+
+  const [recipientSnapshot] = useCollection(
+    db.collection("users").where("email", "==", getEmail(chat.users, user))
+  );
+  // console.log(recipientSnapshot);
+  // console.log(chat.users[0]);
 
   const showMessages = () => {
     if (messagesSnapShot) {
@@ -136,14 +146,34 @@ const ChatScreen = ({ chat, messages }) => {
   };
   // console.log(messages);
 
+  const recipient = recipientSnapshot?.docs?.[0]?.data();
+  // console.log(recipient);
+  const recipientEmail = getEmail(chat.users, user);
+  // console.log(recipient?.photoURL);
+
   return (
     <Container>
       <h2>Chat with {userName}</h2>
       <Header>
-        <ChatAvatar></ChatAvatar>
+        {recipient ? (
+          <Avatar src={recipient?.photoURL}></Avatar>
+        ) : (
+          <Avatar src={recipientEmail[0]}></Avatar>
+        )}
         <HeaderInformation>
-          <h4>Chat with {userName}</h4>
-          <p>Last seen...</p>
+          <h4>{userName}</h4>
+          {recipientSnapshot ? (
+            <p>
+              Last seen:{" "}
+              {recipient?.lastSeen?.toDate() ? (
+                <TimeAgo datetime={recipient?.lastSeen?.toDate()}></TimeAgo>
+              ) : (
+                "Unavailable"
+              )}
+            </p>
+          ) : (
+            <p>Loading last active...</p>
+          )}
         </HeaderInformation>
         <HeaderIcons>
           <IconButton>
