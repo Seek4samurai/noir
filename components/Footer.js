@@ -73,6 +73,7 @@ const Main = styled.div`
 const UsersContainer = styled.div`
   display: flex;
   flex-direction: row;
+  overflow: scroll;
   width: 100%;
 `;
 const SidebarButton = styled(Button)`

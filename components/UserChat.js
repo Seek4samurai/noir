@@ -11,6 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 200px;
   word-break: break-word;
   padding: 0 1rem;
   cursor: pointer;
