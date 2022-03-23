@@ -11,9 +11,7 @@ import Message from "./Message";
 import getEmail from "../utils/getEmail";
 import TimeAgo from "timeago-react";
 
-const Container = styled.div`
-  /* height: 80px; */
-`;
+const Container = styled.div``;
 
 const Header = styled.div`
   position: sticky;
@@ -27,8 +25,9 @@ const Header = styled.div`
   border: 1px solid whitesmoke;
 `;
 
-const ChatAvatar = styled(Avatar)`
+const Heading = styled.h2`
   margin-left: 1rem;
+  color: #303030;
 `;
 
 const HeaderInformation = styled.div`
@@ -90,13 +89,12 @@ const Input = styled.input`
 
 const ChatScreen = ({ chat, messages }) => {
   const [user] = useAuthState(auth);
-  // console.log(chat);
-  // console.log(messages);
   const [input, setInput] = useState("");
   const router = useRouter();
   const endMessageRef = useRef(null);
   const userName = chat.users[1].split("@")[0];
 
+  // collection's snapshots
   const [messagesSnapShot] = useCollection(
     db
       .collection("chats")
@@ -108,12 +106,9 @@ const ChatScreen = ({ chat, messages }) => {
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getEmail(chat.users, user))
   );
-  // console.log(recipientSnapshot);
-  // console.log(chat.users[0]);
 
   const showMessages = () => {
     if (messagesSnapShot) {
-      // console.log("if");
       return messagesSnapShot.docs.map((message) => (
         <Message
           key={message.id}
@@ -125,7 +120,6 @@ const ChatScreen = ({ chat, messages }) => {
         />
       ));
     } else {
-      // console.log("else");
       return JSON.parse(messages).map((message) => (
         <Message key={message.id} user={message.user} message={message} />
       ));
@@ -160,16 +154,12 @@ const ChatScreen = ({ chat, messages }) => {
     scrollToBottom();
   };
 
-  // console.log(messages);
-
   const recipient = recipientSnapshot?.docs?.[0]?.data();
-  // console.log(recipient);
   const recipientEmail = getEmail(chat.users, user);
-  // console.log(recipient?.photoURL);
 
   return (
     <Container>
-      <h2>Chat with {userName}</h2>
+      <Heading>NOIR</Heading>
       <Header>
         {recipient ? (
           <Avatar src={recipient?.photoURL}></Avatar>
