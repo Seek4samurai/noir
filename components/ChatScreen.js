@@ -1,17 +1,21 @@
-import firebase from "firebase/compat/app";
-import { auth, db } from "../firebase";
 import { Avatar, IconButton } from "@material-ui/core";
 import { InsertEmoticon, MoreVert } from "@material-ui/icons";
+import firebase from "firebase/compat/app";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
-import Message from "./Message";
-import getEmail from "../utils/getEmail";
 import TimeAgo from "timeago-react";
+import { auth, db } from "../firebase";
+import getEmail from "../utils/getEmail";
+import Footer from "./Footer";
+import Message from "./Message";
 
-const Container = styled.div``;
+const Container = styled.div`
+  max-height: 100vh;
+  overflow-y: hidden;
+`;
 
 const Header = styled.div`
   position: sticky;
@@ -26,6 +30,7 @@ const Header = styled.div`
 `;
 
 const Heading = styled.h2`
+  margin: 1rem;
   margin-left: 1rem;
   color: #303030;
 `;
@@ -85,6 +90,12 @@ const Input = styled.input`
   position: sticky;
   bottom: 0;
   z-index: 100;
+`;
+
+const FooterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const ChatScreen = ({ chat, messages }) => {
@@ -198,6 +209,9 @@ const ChatScreen = ({ chat, messages }) => {
           Send Message
         </button>
       </InputContainer>
+      <FooterContainer>
+        <Footer></Footer>
+      </FooterContainer>
     </Container>
   );
 };

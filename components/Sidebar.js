@@ -1,39 +1,11 @@
-import { Avatar, Button, IconButton } from "@material-ui/core";
-import { AddCircleOutline, Chat, MoreVert, Search } from "@material-ui/icons";
-import * as EmailValidator from "email-validator";
-import styled from "styled-components";
-import { auth, db } from "../firebase";
+import { Avatar, IconButton } from "@material-ui/core";
+import { MoreVert } from "@material-ui/icons";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollection } from "react-firebase-hooks/firestore";
-import UserChat from "./UserChat";
+import styled from "styled-components";
+import { auth } from "../firebase";
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
-  const userChatRef = db
-    .collection("chats")
-    .where("users", "array-contains", user.email);
-  const [chatSnapshot] = useCollection(userChatRef);
-
-  const createChat = () => {
-    const input = prompt("Enter an Email address: ");
-    if (!input) return null;
-    if (
-      EmailValidator.validate(input) &&
-      !chatExist(input) &&
-      input !== user.email
-    ) {
-      db.collection("chats").add({
-        users: [user.email, input],
-      });
-    }
-  };
-
-  // checking if chat already exists or not
-  const chatExist = (recipientEmail) =>
-    !!chatSnapshot?.docs.find(
-      (chat) =>
-        chat.data().users.find((user) => user === recipientEmail)?.length > 0
-    );
 
   return (
     <Container>
@@ -50,27 +22,6 @@ const Sidebar = () => {
           </IconButton>
         </IconContainer>
       </Header>
-      <Footer>
-        <SearchContainer>
-          <Search></Search>
-          <SearchInput placeholder="Search in chats"></SearchInput>
-        </SearchContainer>
-        <UsersContainer>
-          <AddButton>
-            <SidebarButton onClick={createChat}>
-              <AddCircleOutline fontSize="large"></AddCircleOutline>
-            </SidebarButton>
-          </AddButton>
-          {/* List of chats to be placed here */}
-          {chatSnapshot?.docs.map((chat) => (
-            <UserChat
-              key={chat.id}
-              id={chat.id}
-              users={chat.data().users}
-            ></UserChat>
-          ))}
-        </UsersContainer>
-      </Footer>
     </Container>
   );
 };
@@ -102,39 +53,3 @@ const UserAvatar = styled(Avatar)`
   }
 `;
 const IconContainer = styled.div``;
-
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-`;
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 2px;
-`;
-const SearchInput = styled.input`
-  flex: 1;
-  border: none;
-  outline-width: 0px;
-`;
-const UsersContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  /* overflow: hidden; */
-`;
-const SidebarButton = styled(Button)`
-  min-width: 0;
-`;
-const AddButton = styled.div`
-  /* transform: scale(2); */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
