@@ -3,7 +3,7 @@ import { auth, db } from "../firebase";
 import { Avatar, IconButton } from "@material-ui/core";
 import { InsertEmoticon, MoreVert } from "@material-ui/icons";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
@@ -55,11 +55,16 @@ const HeaderIcons = styled.div`
 const MessageContainer = styled.div`
   padding: 30px;
   min-height: 65vh;
-  background-color: #e5ded8;
+  max-height: 65vh;
+  background-color: #fcd4db;
   z-index: 100;
+  overflow-y: scroll;
 `;
 
-const EndMessages = styled.div``;
+const EndMessages = styled.div`
+  max-height: 65vh;
+  margin-bottom: 100px;
+`;
 
 const InputContainer = styled.form`
   display: flex;
@@ -89,6 +94,7 @@ const ChatScreen = ({ chat, messages }) => {
   // console.log(messages);
   const [input, setInput] = useState("");
   const router = useRouter();
+  const endMessageRef = useRef(null);
   const userName = chat.users[1].split("@")[0];
 
   const [messagesSnapShot] = useCollection(
@@ -126,6 +132,14 @@ const ChatScreen = ({ chat, messages }) => {
     }
   };
 
+  // Helper function for scrolling to bottom automatically
+  const scrollToBottom = () => {
+    endMessageRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   const sendMessage = (e) => {
     e.preventDefault();
 
@@ -143,7 +157,9 @@ const ChatScreen = ({ chat, messages }) => {
       photoURL: user.photoURL,
     });
     setInput("");
+    scrollToBottom();
   };
+
   // console.log(messages);
 
   const recipient = recipientSnapshot?.docs?.[0]?.data();
@@ -183,7 +199,7 @@ const ChatScreen = ({ chat, messages }) => {
       </Header>
       <MessageContainer>
         {showMessages()}
-        <EndMessages></EndMessages>
+        <EndMessages ref={endMessageRef}></EndMessages>
       </MessageContainer>
       <InputContainer>
         <InsertEmoticon></InsertEmoticon>
