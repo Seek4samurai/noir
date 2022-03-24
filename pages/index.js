@@ -1,6 +1,15 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import styled from "styled-components";
+
+const Warning = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+`;
 
 export default function Home() {
   return (
@@ -11,6 +20,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Sidebar></Sidebar>
+      <Warning>
+        Warning: Please don&apos;t talk with your girl/boyfriend here.<br></br>I
+        have access over raw data on Database :p
+      </Warning>
       <Footer></Footer>
     </div>
   );

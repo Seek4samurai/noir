@@ -1,5 +1,5 @@
-import { Avatar, IconButton } from "@material-ui/core";
-import { InsertEmoticon, MoreVert } from "@material-ui/icons";
+import { Avatar, Button, IconButton } from "@material-ui/core";
+import { AttachFile, MoreVert, Send } from "@material-ui/icons";
 import firebase from "firebase/compat/app";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
@@ -27,12 +27,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   border: 1px solid whitesmoke;
-`;
-
-const Heading = styled.h2`
-  margin: 1rem;
-  margin-left: 1rem;
-  color: #303030;
 `;
 
 const HeaderInformation = styled.div`
@@ -170,7 +164,6 @@ const ChatScreen = ({ chat, messages }) => {
 
   return (
     <Container>
-      <Heading>NOIR</Heading>
       <Header>
         {recipient ? (
           <Avatar src={recipient?.photoURL}></Avatar>
@@ -203,11 +196,13 @@ const ChatScreen = ({ chat, messages }) => {
         <EndMessages ref={endMessageRef}></EndMessages>
       </MessageContainer>
       <InputContainer>
-        <InsertEmoticon></InsertEmoticon>
+        <AttachFile></AttachFile>
         <Input value={input} onChange={(e) => setInput(e.target.value)}></Input>
-        <button hidden disabled={!input} type="submit" onClick={sendMessage}>
-          Send Message
-        </button>
+        <Button>
+          <button disabled={!input} type="submit" onClick={sendMessage}>
+            <Send></Send>
+          </button>
+        </Button>
       </InputContainer>
       <FooterContainer>
         <Footer></Footer>

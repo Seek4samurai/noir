@@ -1,39 +1,48 @@
 import { Avatar, IconButton } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
+import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { auth } from "../firebase";
-import Footer from "./Footer";
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
-  const redirectToChats = () => {
-    console.log("redirect");
-    return <Footer></Footer>;
-  };
+  const userImage = user.photoURL;
 
   return (
-    <Container>
-      <Header>
-        <UserAvatar
-          src={user.photoURL}
-          onClick={() => {
-            auth.signOut();
-          }}
-        ></UserAvatar>
-        <IconContainer>
-          <IconButton onClick={() => redirectToChats()}>
-            <MoreVert></MoreVert>
-          </IconButton>
-        </IconContainer>
-      </Header>
-    </Container>
+    <>
+      <Heading>NOIR</Heading>
+      <Container>
+        <Header>
+          <Link href="/">
+            <a>
+              <UserAvatar src={userImage}></UserAvatar>
+            </a>
+          </Link>
+          <IconContainer>
+            <IconButton
+              onClick={() => {
+                auth.signOut();
+              }}
+            >
+              <MoreVert></MoreVert>
+            </IconButton>
+          </IconContainer>
+        </Header>
+      </Container>
+    </>
   );
 };
 
 export default Sidebar;
 
 // Styles here
+const Heading = styled.h2`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #303030;
+`;
 const Container = styled.div`
   width: 100px;
 `;
