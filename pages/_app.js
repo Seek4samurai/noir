@@ -1,3 +1,4 @@
+import Head from "next/head";
 import firestore from "firebase/compat/firestore";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -22,6 +23,10 @@ function MyApp({ Component, pageProps }) {
       );
     }
   }, [user]);
+
+  <Head>
+    <link rel="icon" href="/favicon.ico" />
+  </Head>;
 
   if (loading) return <Loading></Loading>;
   if (!user) return <LoginPage></LoginPage>;

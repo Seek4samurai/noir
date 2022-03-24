@@ -22,6 +22,7 @@ const Header = styled.div`
   background-color: white;
   z-index: 100;
   top: 0;
+  padding: 1rem;
 
   height: 80px;
   display: flex;
@@ -30,10 +31,10 @@ const Header = styled.div`
 `;
 
 const HeaderInformation = styled.div`
-  margin-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 1rem;
   flex: 1;
   > h4 {
     margin: 0px;
@@ -97,7 +98,12 @@ const ChatScreen = ({ chat, messages }) => {
   const [input, setInput] = useState("");
   const router = useRouter();
   const endMessageRef = useRef(null);
-  const userName = chat.users[1].split("@")[0];
+
+  // filtering out the the name of active user to get the name of the other user
+  const filtered = Object.entries(chat.users).filter(
+    ([key, value]) => value != user.email
+  );
+  const userName = filtered[0][1].split("@")[0];
 
   // collection's snapshots
   const [messagesSnapShot] = useCollection(
@@ -198,10 +204,8 @@ const ChatScreen = ({ chat, messages }) => {
       <InputContainer>
         <AttachFile></AttachFile>
         <Input value={input} onChange={(e) => setInput(e.target.value)}></Input>
-        <Button>
-          <button disabled={!input} type="submit" onClick={sendMessage}>
-            <Send></Send>
-          </button>
+        <Button disabled={!input} type="submit" onClick={sendMessage}>
+          <Send></Send>
         </Button>
       </InputContainer>
       <FooterContainer>

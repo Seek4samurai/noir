@@ -1,46 +1,47 @@
-import React from 'react';
+import React from "react";
 import Head from "next/head";
-import styled from 'styled-components';
-import { Button } from '@material-ui/core';
-import { auth, provider } from '../firebase';
+import styled from "styled-components";
+import { Button } from "@material-ui/core";
+import { auth, provider } from "../firebase";
 
 const Container = styled.div`
-    display: grid;
-    place-items: center;
-    height: 100vh;
-    background-color: whitesmoke;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: whitesmoke;
 `;
 const LoginContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 100px;
-    border-radius: 8px;
-    background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+  border-radius: 8px;
+  background-color: white;
 `;
 const Logo = styled.img`
-    height: 200px;
-    width: 120px;
-    margin-button: 50px;
-    margin-bottom: 40px;
+  height: 200px;
+  width: 120px;
+  margin-bottom: 40px;
 `;
 
 const LoginPage = () => {
-    const signIn = () => {
-        auth.signInWithPopup(provider).catch(alert);
-    }
-    return (
-        <Container>
-            <Head>
-                <title>Login</title>
-            </Head>
-            <LoginContainer>
-                <Logo src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/1257px-Ethereum_logo_2014.svg.png'></Logo>
-                <Button onClick={signIn} variant='outlined'>Sign in</Button>
-            </LoginContainer>
-        </Container>
-    );
+  const signIn = () => {
+    auth.signInWithPopup(provider).catch(alert);
+  };
+  return (
+    <Container>
+      <Head>
+        <title>Login</title>
+      </Head>
+      <LoginContainer>
+        <Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/1257px-Ethereum_logo_2014.svg.png"></Logo>
+        <Button onClick={signIn} variant="outlined">
+          Sign in
+        </Button>
+      </LoginContainer>
+    </Container>
+  );
 };
 
 export default LoginPage;
