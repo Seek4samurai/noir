@@ -61,7 +61,12 @@ const Footer = () => {
 
 export default Footer;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: calc(100% - 100px);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
 
 const Main = styled.div`
   display: flex;

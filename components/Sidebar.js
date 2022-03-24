@@ -3,9 +3,14 @@ import { MoreVert } from "@material-ui/icons";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import Footer from "./Footer";
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
+  const redirectToChats = () => {
+    console.log("redirect");
+    return <Footer></Footer>;
+  };
 
   return (
     <Container>
@@ -17,7 +22,7 @@ const Sidebar = () => {
           }}
         ></UserAvatar>
         <IconContainer>
-          <IconButton>
+          <IconButton onClick={() => redirectToChats()}>
             <MoreVert></MoreVert>
           </IconButton>
         </IconContainer>
