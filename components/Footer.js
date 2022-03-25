@@ -44,7 +44,7 @@ const Footer = () => {
             <SidebarButton onClick={createChat}>
               <AddCircleOutline
                 fontSize="large"
-                style={{ width: "50px", height: "90px" }}
+                style={{ color: "#2b95ff", width: "60px", height: "60px" }}
               ></AddCircleOutline>
             </SidebarButton>
           </AddButton>
@@ -86,8 +86,13 @@ const UsersContainer = styled.div`
 `;
 const SidebarButton = styled(Button)`
   min-width: 0;
+  transition: all 2s ease-in-out;
   :hover {
-    background-color: rgba(0, 200, 255, 1) !important;
+    background: linear-gradient(
+      0deg,
+      rgba(226, 186, 255, 1) 0%,
+      rgba(129, 228, 255, 1) 100%
+    );
   }
 `;
 const AddButton = styled.div`

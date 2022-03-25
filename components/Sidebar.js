@@ -1,9 +1,11 @@
 import { Avatar, IconButton } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
+import Image from "next/image";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import noirLogo from "../public/favicon.ico";
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
@@ -11,7 +13,15 @@ const Sidebar = () => {
 
   return (
     <>
-      <Heading>NOIR</Heading>
+      <Heading>
+        NOIR{" "}
+        <Image
+          src={noirLogo}
+          alt="noir Logo"
+          width={"30px"}
+          height={"30px"}
+        ></Image>
+      </Heading>
       <Container>
         <Header>
           <Link href="/">
@@ -38,6 +48,8 @@ export default Sidebar;
 
 // Styles here
 const Heading = styled.h2`
+  display: flex;
+  flex-direction: row;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -48,7 +60,7 @@ const Container = styled.div`
   background: linear-gradient(
     0deg,
     rgba(133, 90, 255, 1) 0%,
-    rgba(0, 187, 255, 1) 100%
+    rgba(124, 218, 255, 1) 100%
   );
   border-radius: 0px 50px 0px 0px;
 `;

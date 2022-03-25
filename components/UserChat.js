@@ -14,12 +14,13 @@ const Container = styled.div`
 
   border-radius: 40px 40px 0px 0px;
 
-  min-width: 200px;
-  height: 130px;
-
-  word-break: break-word;
   padding: 0 1rem;
+  height: 130px;
+  min-width: 200px;
   margin-left: 1rem;
+
+  color: #414242;
+  word-break: break-word;
   cursor: pointer;
 
   :hover {

@@ -19,7 +19,6 @@ const Container = styled.div`
 
 const Header = styled.div`
   position: sticky;
-  background-color: white;
   z-index: 100;
   top: 0;
   padding: 1rem;
@@ -27,7 +26,6 @@ const Header = styled.div`
   height: 80px;
   display: flex;
   align-items: center;
-  border: 1px solid whitesmoke;
 `;
 
 const HeaderInformation = styled.div`
@@ -80,12 +78,13 @@ const Input = styled.input`
   outline: 0;
   border: none;
   border-radius: 10px;
-  background-color: whitesmoke;
+  background-color: white;
   padding: 20px;
   margin: 0 15px;
   position: sticky;
   bottom: 0;
   z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 4px;
 `;
 
 const FooterContainer = styled.div`
@@ -204,7 +203,11 @@ const ChatScreen = ({ chat, messages }) => {
       </MessageContainer>
       <InputContainer>
         <AttachFile></AttachFile>
-        <Input value={input} onChange={(e) => setInput(e.target.value)}></Input>
+        <Input
+          placeholder="Say something..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        ></Input>
         <Button disabled={!input} type="submit" onClick={sendMessage}>
           <Send></Send>
         </Button>

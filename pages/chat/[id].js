@@ -23,7 +23,6 @@ const ChatContainer = styled.div`
 const Chat = ({ chat, messages }) => {
   const [user] = useAuthState(auth);
   const userName = getEmail(chat.users, user).split("@");
-  //   console.log(userName);
 
   return (
     <Container>
@@ -62,8 +61,6 @@ export async function getServerSideProps(context) {
     id: chatRes.id,
     ...chatRes.data(),
   };
-
-  console.log(chat, messages);
 
   return {
     props: {

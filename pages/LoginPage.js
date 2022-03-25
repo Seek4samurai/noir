@@ -8,7 +8,7 @@ const Container = styled.div`
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: whitesmoke;
+  background-color: rgb(225, 241, 255);
 `;
 const LoginContainer = styled.div`
   display: flex;
