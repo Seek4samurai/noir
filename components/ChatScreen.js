@@ -2,7 +2,7 @@ import { Avatar, Button, IconButton } from "@material-ui/core";
 import { AttachFile, MoreVert, Send } from "@material-ui/icons";
 import firebase from "firebase/compat/app";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
@@ -100,6 +100,24 @@ const ChatScreen = ({ chat, messages }) => {
   const router = useRouter();
   const endMessageRef = useRef(null);
 
+  // Helper function for scrolling to bottom automatically
+  const scrollToBottom = () => {
+    if (endMessageRef.current) {
+      endMessageRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (endMessageRef.current) {
+      setInterval(() => {
+        scrollToBottom();
+      }, 1000);
+    }
+  }, [router.query.id, endMessageRef]);
+
   // filtering out the the name of active user to get the name of the other user
   const filtered = Object.entries(chat.users).filter(
     ([key, value]) => value != user.email
@@ -138,14 +156,6 @@ const ChatScreen = ({ chat, messages }) => {
     }
   };
 
-  // Helper function for scrolling to bottom automatically
-  const scrollToBottom = () => {
-    endMessageRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
   const sendMessage = (e) => {
     e.preventDefault();
 
@@ -164,6 +174,10 @@ const ChatScreen = ({ chat, messages }) => {
     });
     setInput("");
     scrollToBottom();
+  };
+
+  const chatDropDown = () => {
+    console.log("clicked");
   };
 
   const recipient = recipientSnapshot?.docs?.[0]?.data();
@@ -192,7 +206,7 @@ const ChatScreen = ({ chat, messages }) => {
             <p>Loading last active...</p>
           )}
         </HeaderInformation>
-        <HeaderIcons>
+        <HeaderIcons onClick={() => chatDropDown()}>
           <IconButton>
             <MoreVert></MoreVert>
           </IconButton>
