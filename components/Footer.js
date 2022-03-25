@@ -1,5 +1,7 @@
-import { Button } from "@material-ui/core";
-import { AddCircleOutline } from "@material-ui/icons";
+// import { Button } from "@material-ui/core";
+// import { AddCircleOutline } from "@material-ui/icons";
+import { Button } from "@mui/material";
+import { AddCircleOutlined } from "@mui/icons-material";
 import * as EmailValidator from "email-validator";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -42,10 +44,10 @@ const Footer = () => {
         <UsersContainer>
           <AddButton>
             <SidebarButton onClick={createChat}>
-              <AddCircleOutline
+              <AddCircleOutlined
                 fontSize="large"
                 style={{ color: "#2b95ff", width: "60px", height: "60px" }}
-              ></AddCircleOutline>
+              ></AddCircleOutlined>
             </SidebarButton>
           </AddButton>
           {/* List of chats to be placed here */}

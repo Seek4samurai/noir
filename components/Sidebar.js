@@ -1,5 +1,6 @@
-import { Avatar, IconButton } from "@material-ui/core";
-import { MoreVert } from "@material-ui/icons";
+// import { Avatar, IconButton } from "@material-ui/core";
+import { MoreVertOutlined } from "@mui/icons-material";
+import { Avatar, IconButton } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -35,7 +36,10 @@ const Sidebar = () => {
                 auth.signOut();
               }}
             >
-              <MoreVert fontSize="large" style={{ color: "white" }}></MoreVert>
+              <MoreVertOutlined
+                fontSize="large"
+                style={{ color: "white" }}
+              ></MoreVertOutlined>
             </IconButton>
           </IconContainer>
         </Header>

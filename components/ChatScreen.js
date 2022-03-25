@@ -1,5 +1,5 @@
-import { Avatar, Button, IconButton } from "@material-ui/core";
-import { AttachFile, MoreVert, Send } from "@material-ui/icons";
+import { Avatar, Button, IconButton } from "@mui/material";
+import { AttachFile, MoreVert, Send } from "@mui/icons-material";
 import firebase from "firebase/compat/app";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
