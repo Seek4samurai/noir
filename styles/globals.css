@@ -5,12 +5,31 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
+* {
+  box-sizing: border-box;
+  transition: all 0.5s ease-in-out !important;
+}
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* Scrollbar properties works on Firefox */
 * {
-  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: blue #e2baff;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: orange;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border: 3px solid orange;
 }

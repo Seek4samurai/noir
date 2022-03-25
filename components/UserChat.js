@@ -11,16 +11,27 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  border-radius: 40px 40px 0px 0px;
+
   min-width: 200px;
+  height: 130px;
+
   word-break: break-word;
   padding: 0 1rem;
+  margin-left: 1rem;
   cursor: pointer;
+
   :hover {
-    background-color: #e9eaeb;
+    background: linear-gradient(
+      0deg,
+      rgba(226, 186, 255, 1) 0%,
+      rgba(129, 228, 255, 1) 100%
+    );
   }
 `;
 const UserImage = styled(Avatar)`
-  margin: 5px;
+  margin: 4px;
   transform: scale(1.2);
 `;
 

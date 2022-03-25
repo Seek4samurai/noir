@@ -55,7 +55,8 @@ const MessageContainer = styled.div`
   padding: 30px;
   min-height: 65vh;
   max-height: 65vh;
-  background-color: #fcd4db;
+  background-color: rgba(169, 226, 255, 0.4);
+  border-radius: 40px;
   z-index: 100;
   overflow-y: scroll;
 `;

@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import { AddCircleOutline, Search } from "@material-ui/icons";
+import { AddCircleOutline } from "@material-ui/icons";
 import * as EmailValidator from "email-validator";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -42,7 +42,10 @@ const Footer = () => {
         <UsersContainer>
           <AddButton>
             <SidebarButton onClick={createChat}>
-              <AddCircleOutline fontSize="large"></AddCircleOutline>
+              <AddCircleOutline
+                fontSize="large"
+                style={{ width: "50px", height: "90px" }}
+              ></AddCircleOutline>
             </SidebarButton>
           </AddButton>
           {/* List of chats to be placed here */}
@@ -78,14 +81,18 @@ const Main = styled.div`
 const UsersContainer = styled.div`
   display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow-x: scroll;
   width: 100%;
 `;
 const SidebarButton = styled(Button)`
   min-width: 0;
+  :hover {
+    background-color: rgba(0, 200, 255, 1) !important;
+  }
 `;
 const AddButton = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 16px;
 `;

@@ -25,7 +25,7 @@ const Sidebar = () => {
                 auth.signOut();
               }}
             >
-              <MoreVert></MoreVert>
+              <MoreVert fontSize="large" style={{ color: "white" }}></MoreVert>
             </IconButton>
           </IconContainer>
         </Header>
@@ -45,6 +45,12 @@ const Heading = styled.h2`
 `;
 const Container = styled.div`
   width: 100px;
+  background: linear-gradient(
+    0deg,
+    rgba(133, 90, 255, 1) 0%,
+    rgba(0, 187, 255, 1) 100%
+  );
+  border-radius: 0px 50px 0px 0px;
 `;
 const Header = styled.div`
   position: sticky;
@@ -53,16 +59,18 @@ const Header = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
   padding: 1rem;
   height: 100vh;
   width: 100%;
-  border-bottom: 3px solid whitesmoke;
   z-index: 1;
 `;
 const UserAvatar = styled(Avatar)`
   cursor: pointer;
+  width: 55px !important;
+  height: 55px !important;
+  border: 4px solid white;
   :hover {
+    border-color: white;
     opacity: 0.8;
   }
 `;
