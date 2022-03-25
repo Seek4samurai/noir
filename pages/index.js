@@ -2,12 +2,27 @@ import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import styled from "styled-components";
+import noirLogo from "../public/favicon.ico";
+import Image from "next/image";
 
-const Warning = styled.div`
+const Hero = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: #444444;
+`;
+const Splash = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+const SplashImage = styled.div`
+  width: 50px;
+  height: 50px;
+`;
+const Warning = styled.div`
   text-align: center;
 `;
 
@@ -20,10 +35,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Sidebar></Sidebar>
-      <Warning>
-        Warning: Please don&apos;t talk with your girl/boyfriend here.<br></br>I
-        have access over raw data on Database :p
-      </Warning>
+      <Hero>
+        <Splash>
+          <h1>NOIR</h1>
+          <SplashImage>
+            <Image
+              src={noirLogo}
+              alt="noir Logo"
+              width={"100%"}
+              height={"100%"}
+            ></Image>
+          </SplashImage>
+          <h3>Realtime application</h3>
+        </Splash>
+        <Warning>
+          No talking with your girl/boyfriend here.
+          <br></br>I have access over raw data on Database :p
+        </Warning>
+      </Hero>
       <Footer></Footer>
     </div>
   );

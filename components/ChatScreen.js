@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import Message from "./Message";
 
 const Container = styled.div`
+  padding-left: 1rem;
   max-height: 100vh;
   overflow-y: hidden;
 `;
@@ -202,7 +203,9 @@ const ChatScreen = ({ chat, messages }) => {
         <EndMessages ref={endMessageRef}></EndMessages>
       </MessageContainer>
       <InputContainer>
-        <AttachFile></AttachFile>
+        <Button>
+          <AttachFile></AttachFile>
+        </Button>
         <Input
           placeholder="Say something..."
           value={input}
