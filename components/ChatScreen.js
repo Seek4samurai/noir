@@ -111,12 +111,10 @@ const ChatScreen = ({ chat, messages }) => {
   };
 
   useEffect(() => {
-    if (endMessageRef.current) {
-      setInterval(() => {
-        scrollToBottom();
-      }, 1000);
-    }
-  }, [router.query.id, endMessageRef]);
+    setTimeout(() => {
+      scrollToBottom();
+    }, 1000);
+  }, [router.query.id]);
 
   // filtering out the the name of active user to get the name of the other user
   const filtered = Object.entries(chat.users).filter(
