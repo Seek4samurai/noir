@@ -16,6 +16,10 @@ const Container = styled.div`
   padding-left: 1rem;
   max-height: 100vh;
   overflow-y: hidden;
+  @media only screen and (max-width: 840px) {
+    padding: 0 0.4rem;
+    padding-top: 4rem;
+  }
 `;
 
 const Header = styled.div`
@@ -58,11 +62,19 @@ const MessageContainer = styled.div`
   border-radius: 40px;
   z-index: 100;
   overflow-y: scroll;
+
+  @media only screen and (max-width: 840px) {
+    border-radius: 20px;
+  }
 `;
 
 const EndMessages = styled.div`
   max-height: 65vh;
   margin-bottom: 100px;
+
+  @media only screen and (max-width: 840px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const InputContainer = styled.form`
@@ -72,6 +84,14 @@ const InputContainer = styled.form`
   position: sticky;
   bottom: 0;
   z-index: 100;
+
+  @media only screen and (max-width: 396px) {
+    padding: 10px 0;
+  }
+
+  @media (min-width: 396px) and (max-width: 840px) {
+    padding: 10px 0;
+  }
 `;
 
 const Input = styled.input`
@@ -86,6 +106,17 @@ const Input = styled.input`
   bottom: 0;
   z-index: 100;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 4px;
+
+  @media only screen and (max-width: 396px) {
+    max-width: 396px;
+    padding: 10px;
+    margin: 0;
+  }
+
+  @media (min-width: 396px) and (max-width: 840px) {
+    padding: 10px;
+    width: auto;
+  }
 `;
 
 const FooterContainer = styled.div`
