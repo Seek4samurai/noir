@@ -3,6 +3,8 @@ import Head from "next/head";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import { auth, provider } from "../firebase";
+import Image from "next/image";
+import Logo from "../public/Logo.png";
 
 const Container = styled.div`
   display: grid;
@@ -19,11 +21,6 @@ const LoginContainer = styled.div`
   border-radius: 8px;
   background-color: white;
 `;
-const Logo = styled.img`
-  height: 200px;
-  width: 120px;
-  margin-bottom: 40px;
-`;
 
 const LoginPage = () => {
   const signIn = () => {
@@ -35,7 +32,16 @@ const LoginPage = () => {
         <title>Login</title>
       </Head>
       <LoginContainer>
-        <Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/1257px-Ethereum_logo_2014.svg.png"></Logo>
+        <div
+          style={{
+            width: "120px",
+            height: "200px",
+            position: "relative",
+            marginBottom: "40px",
+          }}
+        >
+          <Image alt="Logo" src={Logo} layout="fill" objectFit="contain" />
+        </div>
         <Button onClick={signIn} variant="outlined">
           Sign in
         </Button>
