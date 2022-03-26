@@ -53,10 +53,16 @@ export default Sidebar;
 const Heading = styled.h2`
   display: flex;
   flex-direction: row;
+  align-items: center;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   color: #303030;
+  z-index: 2;
+  @media only screen and (max-width: 840px) {
+    color: white;
+    font-size: 1.2rem;
+  }
 `;
 const Container = styled.div`
   width: 100px;
@@ -66,6 +72,10 @@ const Container = styled.div`
     rgba(124, 218, 255, 1) 100%
   );
   border-radius: 0px 50px 0px 0px;
+
+  @media only screen and (max-width: 840px) {
+    width: 0px;
+  }
 `;
 const Header = styled.div`
   position: sticky;
@@ -78,6 +88,21 @@ const Header = styled.div`
   height: 100vh;
   width: 100%;
   z-index: 1;
+
+  @media only screen and (max-width: 840px) {
+    background: linear-gradient(
+      0deg,
+      rgba(133, 90, 255, 1) 0%,
+      rgba(124, 218, 255, 1) 100%
+    );
+    border-radius: 0px 0px 20px 20px;
+
+    width: 100vw;
+    height: fit-content;
+    flex-direction: row;
+    padding: 0.4rem;
+    z-index: 1;
+  }
 `;
 const UserAvatar = styled(Avatar)`
   cursor: pointer;
@@ -88,5 +113,12 @@ const UserAvatar = styled(Avatar)`
     border-color: white;
     opacity: 0.8;
   }
+
+  @media only screen and (max-width: 840px) {
+    width: 40px !important;
+    height: 40px !important;
+  }
 `;
-const IconContainer = styled.div``;
+const IconContainer = styled.div`
+  fill: black !important;
+`;

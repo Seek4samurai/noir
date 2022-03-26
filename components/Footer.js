@@ -69,6 +69,9 @@ const Container = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
+  @media only screen and (max-width: 840px) {
+    width: 100vw;
+  }
 `;
 
 const Main = styled.div`
@@ -100,4 +103,9 @@ const AddButton = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 0 16px;
+
+  @media only screen and (max-width: 840px) {
+    padding: 0 10px;
+    transform: scale(0.7);
+  }
 `;

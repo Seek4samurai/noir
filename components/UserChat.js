@@ -16,12 +16,25 @@ const Container = styled.div`
 
   padding: 0 1rem;
   height: 130px;
-  min-width: 200px;
+  min-width: 180px;
   margin-left: 1rem;
 
   color: #414242;
   word-break: break-word;
   cursor: pointer;
+
+  @media only screen and (max-width: 840px) {
+    justify-content: end;
+    height: 100px;
+    min-width: 130px;
+    width: 150px;
+    padding: 0 0.4rem;
+    margin-left: 0.2rem;
+    border-radius: 30px 30px 0px 0px;
+    p {
+      font-size: 0.8rem;
+    }
+  }
 
   :hover {
     background: linear-gradient(
@@ -32,8 +45,11 @@ const Container = styled.div`
   }
 `;
 const UserImage = styled(Avatar)`
-  margin: 4px;
   transform: scale(1.2);
+
+  @media only screen and (max-width: 840px) {
+    transform: scale(1);
+  }
 `;
 
 const UserChat = ({ id, users }) => {
