@@ -1,5 +1,5 @@
-import { Avatar, Button, IconButton } from "@mui/material";
 import { AttachFile, MoreVert, Send } from "@mui/icons-material";
+import { Avatar, Button, IconButton } from "@mui/material";
 import firebase from "firebase/compat/app";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -11,6 +11,7 @@ import { auth, db } from "../firebase";
 import getEmail from "../utils/getEmail";
 import Footer from "./Footer";
 import Message from "./Message";
+import DropDown from "./subComponents/DropDown";
 
 const Container = styled.div`
   padding-left: 1rem;
@@ -70,7 +71,7 @@ const MessageContainer = styled.div`
 
 const EndMessages = styled.div`
   max-height: 65vh;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
 
   @media only screen and (max-width: 840px) {
     margin-bottom: 20px;
@@ -126,6 +127,7 @@ const FooterContainer = styled.div`
 `;
 
 const ChatScreen = ({ chat, messages }) => {
+  const [menu, setMenu] = useState(false);
   const [user] = useAuthState(auth);
   const [input, setInput] = useState("");
   const router = useRouter();
@@ -205,10 +207,6 @@ const ChatScreen = ({ chat, messages }) => {
     scrollToBottom();
   };
 
-  const chatDropDown = () => {
-    console.log("clicked");
-  };
-
   const recipient = recipientSnapshot?.docs?.[0]?.data();
   const recipientEmail = getEmail(chat.users, user);
 
@@ -235,7 +233,8 @@ const ChatScreen = ({ chat, messages }) => {
             <p>Loading last active...</p>
           )}
         </HeaderInformation>
-        <HeaderIcons onClick={() => chatDropDown()}>
+        {menu && <DropDown></DropDown>}
+        <HeaderIcons onClick={() => setMenu((prevState) => !prevState)}>
           <IconButton>
             <MoreVert></MoreVert>
           </IconButton>
