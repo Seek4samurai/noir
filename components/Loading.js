@@ -4,34 +4,18 @@ import Image from "next/image";
 import Logo from "../public/Logo.png";
 
 const Center = styled.div`
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
-  background-color: white;
 `;
 
 const Loading = () => {
   return (
     <Center>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "80px",
-            height: "140px",
-            position: "relative",
-            marginBottom: "20px",
-          }}
-        >
-          <Image src={Logo} alt="Loading" layout="fill"></Image>
-        </div>
-        <Wave size={40}></Wave>
-      </div>
+      <Image src={Logo} width="80" height="140" alt="Loading"></Image>
+      <Wave size={40}></Wave>
     </Center>
   );
 };
