@@ -69,6 +69,10 @@ const Container = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
+
+  @media (max-height: 968px) {
+    display: none;
+  }
   @media only screen and (max-width: 840px) {
     width: 100vw;
   }
@@ -91,11 +95,7 @@ const SidebarButton = styled(Button)`
   min-width: 0;
   transition: all 2s ease-in-out;
   :hover {
-    background: linear-gradient(
-      0deg,
-      rgba(226, 186, 255, 1) 0%,
-      rgba(129, 228, 255, 1) 100%
-    );
+    background-color: #d3eeff;
   }
 `;
 const AddButton = styled.div`

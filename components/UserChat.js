@@ -37,13 +37,10 @@ const Container = styled.div`
   }
 
   :hover {
-    background: linear-gradient(
-      0deg,
-      rgba(226, 186, 255, 1) 0%,
-      rgba(129, 228, 255, 1) 100%
-    );
+    background: #d3eeff;
   }
 `;
+
 const UserImage = styled(Avatar)`
   transform: scale(1.2);
 

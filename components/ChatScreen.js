@@ -9,6 +9,7 @@ import styled from "styled-components";
 import TimeAgo from "timeago-react";
 import { auth, db } from "../firebase";
 import getEmail from "../utils/getEmail";
+import BottomDrawer from "./BottomDrawer";
 import Footer from "./Footer";
 import Message from "./Message";
 import DropDown from "./subComponents/DropDown";
@@ -259,6 +260,7 @@ const ChatScreen = ({ chat, messages }) => {
       </InputContainer>
       <FooterContainer>
         <Footer></Footer>
+        <BottomDrawer></BottomDrawer>
       </FooterContainer>
     </Container>
   );

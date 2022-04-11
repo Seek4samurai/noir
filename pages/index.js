@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import BottomDrawer from "../components/BottomDrawer";
 import styled from "styled-components";
 import noirLogo from "../public/favicon.ico";
 import Image from "next/image";
@@ -66,6 +67,7 @@ export default function Home() {
         </Warning>
       </Hero>
       <Footer></Footer>
+      <BottomDrawer></BottomDrawer>
     </div>
   );
 }
