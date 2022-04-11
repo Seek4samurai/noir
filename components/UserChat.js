@@ -22,6 +22,7 @@ const Container = styled.div`
   color: #414242;
   word-break: break-word;
   cursor: pointer;
+  transition: all 0.4s;
 
   @media only screen and (max-width: 840px) {
     justify-content: end;

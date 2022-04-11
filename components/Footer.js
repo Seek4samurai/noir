@@ -93,7 +93,7 @@ const UsersContainer = styled.div`
 `;
 const SidebarButton = styled(Button)`
   min-width: 0;
-  transition: all 2s ease-in-out;
+  transition: all 0.4s;
   :hover {
     background-color: #d3eeff;
   }
