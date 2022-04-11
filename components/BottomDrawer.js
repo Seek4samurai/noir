@@ -18,11 +18,14 @@ const Container = styled.div`
   right: 0;
   box-shadow: 0px -8px 8px 0px rgba(0, 0, 0, 0.5);
   z-index: 100;
-  transition: all 2s;
+  transition: all 0.7s;
 
   @media (max-height: 968px) {
     display: flex;
     flex-direction: column;
+  }
+  @media (max-width: 840px) {
+    width: 100%;
   }
 `;
 const AddUser = styled.div`
@@ -37,11 +40,11 @@ const UserContainer = styled.div`
   flex-direction: row;
   overflow-x: scroll;
   width: 100%;
-  transition: all 2s;
+  transition: all 0.7s;
 `;
 const SidebarButton = styled(Button)`
   min-width: 0;
-  transition: all 2s;
+  transition: all 0.7s;
   :hover {
     background-color: #d3eeff;
   }
