@@ -8,7 +8,7 @@ body {
 }
 * {
   box-sizing: border-box;
-  /* transition: all 0.5s ease-in-out !important; */
+  transition: all 0.5s;
 }
 a {
   color: inherit;
@@ -27,10 +27,11 @@ a {
 }
 
 *::-webkit-scrollbar-track {
-  background: rgb(255, 0, 106);
+  background: #eef7ff;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: blue;
-  border: 3px solid rgb(255, 0, 106);
+  border: 3px solid #eef7ff;
+  border-radius: 15px;
 }
