@@ -205,7 +205,12 @@ const ChatScreen = ({ chat, messages }) => {
       photoURL: user.photoURL,
     });
     setInput("");
-    scrollToBottom();
+
+    // Scrolling to bottom when message is sent
+    // scrollToBottom();
+    setTimeout(() => {
+      scrollToBottom();
+    }, 100);
   };
 
   const recipient = recipientSnapshot?.docs?.[0]?.data();
