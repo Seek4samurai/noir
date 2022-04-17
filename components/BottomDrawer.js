@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { AddCircleOutlined } from "@mui/icons-material";
-import { useAuthState } from "react-firebase-hooks/auth";
-import UserChat from "./UserChat";
-import { auth, db } from "../firebase";
-import { useCollection } from "react-firebase-hooks/firestore";
-import { useState } from "react";
+import { Person } from "@mui/icons-material";
 import { Button } from "@mui/material";
+import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
+import styled from "styled-components";
+import { auth, db } from "../firebase";
+import UserChat from "./UserChat";
 
 const Container = styled.div`
   display: none;
@@ -49,41 +49,10 @@ const SidebarButton = styled(Button)`
     background-color: #d3eeff;
   }
 `;
-const AddButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 5px;
-
-  @media only screen and (max-width: 840px) {
-    padding: 0 5px;
-    transform: scale(0.7);
-  }
-`;
 
 const BottomDrawer = () => {
   const [user] = useAuthState(auth);
   const [hide, setHide] = useState(true);
-
-  const createChat = () => {
-    const input = prompt("Enter an Email address: ");
-    if (!input) return null;
-    if (
-      EmailValidator.validate(input) &&
-      !chatExist(input) &&
-      input !== user.email
-    ) {
-      db.collection("chats").add({
-        users: [user.email, input],
-      });
-    }
-  };
-
-  const chatExist = (recipientEmail) =>
-    !!chatSnapshot?.docs.find(
-      (chat) =>
-        chat.data().users.find((user) => user === recipientEmail)?.length > 0
-    );
 
   // checking if chat already exists or not
   const userChatRef = db
@@ -96,19 +65,11 @@ const BottomDrawer = () => {
   return (
     <Container>
       <AddUser onClick={hideDrawer}>
-        <AddCircleOutlined></AddCircleOutlined>
-        Create chat!
+        <Person></Person>
+        Messages!
       </AddUser>
       {hide ? null : (
         <UserContainer>
-          <AddButton>
-            <SidebarButton onClick={createChat}>
-              <AddCircleOutlined
-                fontSize="large"
-                style={{ color: "#2b95ff", width: "60px", height: "60px" }}
-              ></AddCircleOutlined>
-            </SidebarButton>
-          </AddButton>
           {/* List of chats to be placed here */}
           {chatSnapshot?.docs.map((chat) => (
             <UserChat

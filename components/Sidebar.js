@@ -1,15 +1,43 @@
-import { MoreVertOutlined } from "@mui/icons-material";
-import { Avatar, IconButton } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
-import { auth } from "../firebase";
+import * as EmailValidator from "email-validator";
+import { AddCircleOutlined, Logout, Search } from "@mui/icons-material";
+import { Avatar, Button } from "@mui/material";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
 import noirLogo from "../public/favicon.ico";
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
   const userImage = user.photoURL;
+
+  // checking if chat already exists or not
+  const userChatRef = db
+    .collection("chats")
+    .where("users", "array-contains", user.email);
+  const [chatSnapshot] = useCollection(userChatRef);
+
+  const createChat = () => {
+    const input = prompt("Enter an Email address: ");
+    if (!input) return null;
+    if (
+      EmailValidator.validate(input) &&
+      !chatExist(input) &&
+      input !== user.email
+    ) {
+      db.collection("chats").add({
+        users: [user.email, input],
+      });
+    }
+  };
+
+  const chatExist = (recipientEmail) =>
+    !!chatSnapshot?.docs.find(
+      (chat) =>
+        chat.data().users.find((user) => user === recipientEmail)?.length > 0
+    );
 
   return (
     <>
@@ -30,16 +58,43 @@ const Sidebar = () => {
             </a>
           </Link>
           <IconContainer>
-            <IconButton
+            <SideButtons>
+              <AddButton>
+                <AddCircleOutlined
+                  onClick={createChat}
+                  style={{
+                    cursor: "pointer",
+                    color: "white",
+                    width: "40px",
+                    height: "40px",
+                  }}
+                ></AddCircleOutlined>
+              </AddButton>
+              <SearchButton>
+                <Search
+                  style={{
+                    cursor: "pointer",
+                    color: "white",
+                    width: "40px",
+                    height: "40px",
+                  }}
+                ></Search>
+              </SearchButton>
+            </SideButtons>
+            <LogOutButton
               onClick={() => {
                 auth.signOut();
               }}
             >
-              <MoreVertOutlined
-                fontSize="large"
-                style={{ color: "white" }}
-              ></MoreVertOutlined>
-            </IconButton>
+              <Logout
+                style={{
+                  cursor: "pointer",
+                  color: "white",
+                  width: "40px",
+                  height: "40px",
+                }}
+              ></Logout>
+            </LogOutButton>
           </IconContainer>
         </Header>
       </Container>
@@ -66,13 +121,8 @@ const Heading = styled.h2`
 `;
 const Container = styled.div`
   width: 100px;
-  background: linear-gradient(
-    0deg,
-    rgba(133, 90, 255, 1) 0%,
-    rgba(124, 218, 255, 1) 100%
-  );
+  background-color: #5e93ff;
   border-radius: 0px 50px 0px 0px;
-
   @media only screen and (max-width: 840px) {
     width: 0px;
   }
@@ -82,13 +132,11 @@ const Header = styled.div`
   top: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   height: 100vh;
   width: 100%;
   z-index: 1;
-
   @media only screen and (max-width: 840px) {
     background: linear-gradient(
       0deg,
@@ -96,7 +144,6 @@ const Header = styled.div`
       rgba(124, 218, 255, 1) 100%
     );
     border-radius: 0px 0px 20px 20px;
-
     width: 100vw;
     height: fit-content;
     flex-direction: row;
@@ -113,12 +160,52 @@ const UserAvatar = styled(Avatar)`
     border-color: white;
     opacity: 0.8;
   }
-
   @media only screen and (max-width: 840px) {
     width: 40px !important;
     height: 40px !important;
   }
 `;
 const IconContainer = styled.div`
-  fill: black !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  @media only screen and (max-width: 840px) {
+    width: 100%;
+    flex-direction: row;
+  }
+`;
+const SideButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media only screen and (max-width: 840px) {
+    flex-direction: row;
+  }
+`;
+const SearchButton = styled(Button)`
+  padding: 0 16px;
+  min-width: 0;
+  transition: all 0.4s;
+  @media only screen and (max-width: 840px) {
+    padding: 0 10px;
+    transform: scale(0.7);
+  }
+`;
+const AddButton = styled(Button)`
+  padding: 0 16px;
+  min-width: 0;
+  transition: all 0.4s;
+  @media only screen and (max-width: 840px) {
+    padding: 0 10px;
+    transform: scale(0.7);
+  }
+`;
+const LogOutButton = styled(Button)`
+  padding: 0 16px;
+  min-width: 0;
+  transition: all 0.4s;
+  @media only screen and (max-width: 840px) {
+    padding: 0 10px;
+    transform: scale(0.7);
+  }
 `;

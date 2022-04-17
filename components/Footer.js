@@ -1,11 +1,8 @@
-import { Button } from "@mui/material";
-import { AddCircleOutlined } from "@mui/icons-material";
-import * as EmailValidator from "email-validator";
+import styled from "styled-components";
+import UserChat from "./UserChat";
+import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import styled from "styled-components";
-import { auth, db } from "../firebase";
-import UserChat from "./UserChat";
 
 const Footer = () => {
   const [user] = useAuthState(auth);
@@ -16,38 +13,10 @@ const Footer = () => {
     .where("users", "array-contains", user.email);
   const [chatSnapshot] = useCollection(userChatRef);
 
-  const createChat = () => {
-    const input = prompt("Enter an Email address: ");
-    if (!input) return null;
-    if (
-      EmailValidator.validate(input) &&
-      !chatExist(input) &&
-      input !== user.email
-    ) {
-      db.collection("chats").add({
-        users: [user.email, input],
-      });
-    }
-  };
-
-  const chatExist = (recipientEmail) =>
-    !!chatSnapshot?.docs.find(
-      (chat) =>
-        chat.data().users.find((user) => user === recipientEmail)?.length > 0
-    );
-
   return (
     <Container>
       <Main>
         <UsersContainer>
-          <AddButton>
-            <SidebarButton onClick={createChat}>
-              <AddCircleOutlined
-                fontSize="large"
-                style={{ color: "#2b95ff", width: "60px", height: "60px" }}
-              ></AddCircleOutlined>
-            </SidebarButton>
-          </AddButton>
           {/* List of chats to be placed here */}
           {chatSnapshot?.docs.map((chat) => (
             <UserChat
@@ -90,22 +59,4 @@ const UsersContainer = styled.div`
   flex-direction: row;
   overflow-x: scroll;
   width: 100%;
-`;
-const SidebarButton = styled(Button)`
-  min-width: 0;
-  transition: all 0.4s;
-  :hover {
-    background-color: #d3eeff;
-  }
-`;
-const AddButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 16px;
-
-  @media only screen and (max-width: 840px) {
-    padding: 0 10px;
-    transform: scale(0.7);
-  }
 `;
