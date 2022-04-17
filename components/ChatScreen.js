@@ -239,7 +239,7 @@ const ChatScreen = ({ chat, messages }) => {
             <p>Loading last active...</p>
           )}
         </HeaderInformation>
-        {menu && <DropDown></DropDown>}
+        {menu && <DropDown stateChanger={setMenu}></DropDown>}
         <HeaderIcons onClick={() => setMenu((prevState) => !prevState)}>
           <IconButton>
             <MoreVert></MoreVert>

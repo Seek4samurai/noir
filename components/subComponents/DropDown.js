@@ -1,19 +1,32 @@
 import styled from "styled-components";
-import { Delete } from "@mui/icons-material";
+import { Delete, GroupRemove } from "@mui/icons-material";
 import { db } from "../../firebase";
 import { useRouter } from "next/router";
 
-const List = styled.div`
-  cursor: pointer;
-  padding: 0.8rem;
-  background-color: #d2efff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Container = styled.div`
+  position: relative;
+  top: 2rem;
+
+  background-color: #eef7ff;
   border-radius: 10px;
 `;
 
-const DropDown = () => {
+// make this responsive
+const List = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 150px;
+  padding: 0.8rem;
+  margin: 0.2rem;
+
+  background-color: #d2efff;
+  border-radius: 10px;
+`;
+
+const DropDown = ({ stateChanger }) => {
   const router = useRouter();
 
   const deleteChat = async () => {
@@ -26,16 +39,23 @@ const DropDown = () => {
 
       const deletePromises = chatSnapShot.docs.map((d) => d.ref.delete());
       await Promise.all(deletePromises);
+
+      stateChanger(false); // hides the dropdown again after deleting
       console.log("Documents deleted");
     }
   };
 
   return (
-    <div>
+    <Container>
       <List onClick={deleteChat}>
-        <Delete></Delete> Delete
+        <Delete></Delete>
+        Delete Chat
       </List>
-    </div>
+      <List>
+        <GroupRemove></GroupRemove>
+        Delete User
+      </List>
+    </Container>
   );
 };
 
