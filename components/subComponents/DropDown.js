@@ -45,13 +45,24 @@ const DropDown = ({ stateChanger }) => {
     }
   };
 
+  const deleteUser = async () => {
+    if (window.confirm("Do you really want to leave?")) {
+      const userSnapShot = await db.collection("chats").doc(router.query.id);
+      userSnapShot.delete();
+
+      stateChanger(false); // hides the dropdown again after deleting
+      router.push("/"); // deleting a chat should refresh the route
+      console.log("User deleted");
+    }
+  };
+
   return (
     <Container>
       <List onClick={deleteChat}>
         <Delete></Delete>
         Delete Chat
       </List>
-      <List>
+      <List onClick={deleteUser}>
         <GroupRemove></GroupRemove>
         Delete User
       </List>
