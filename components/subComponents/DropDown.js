@@ -47,12 +47,34 @@ const DropDown = ({ stateChanger }) => {
 
   const deleteUser = async () => {
     if (window.confirm("Do you really want to leave?")) {
+      // deleting messages data of user once the whole user is deleted
+      const chatSnapShot = await db
+        .collection("chats")
+        .doc(router.query.id)
+        .collection("messages")
+        .get();
+
+      const deletePromises = chatSnapShot.docs.map((d) => d.ref.delete());
+      await Promise.all(deletePromises);
+
+      // deleting saved nick names of user once the whole user is deleted
+      const nickNameSnapShot = await db
+        .collection("chats")
+        .doc(router.query.id)
+        .collection("nickName")
+        .get();
+
+      const deleteNamePromises = nickNameSnapShot.docs.map((d) =>
+        d.ref.delete()
+      );
+      await Promise.all(deleteNamePromises);
+
+      // Now deleting the user's chat with Current User
       const userSnapShot = await db.collection("chats").doc(router.query.id);
       userSnapShot.delete();
 
       stateChanger(false); // hides the dropdown again after deleting
       router.push("/"); // deleting a chat should refresh the route
-      console.log("User deleted");
     }
   };
 
