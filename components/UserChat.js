@@ -1,4 +1,5 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
+import RateReviewIcon from "@mui/icons-material/RateReview";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
@@ -42,6 +43,18 @@ const Container = styled.div`
   }
 `;
 
+const EditUser = styled.span`
+  display: flex;
+  padding-left: 3rem;
+  cursor: pointer;
+  :hover {
+    ::after {
+      content: "Edit";
+      display: flex;
+      align-items: center;
+    }
+  }
+`;
 const UserImage = styled(Avatar)`
   transform: scale(1.2);
 
@@ -53,6 +66,7 @@ const UserImage = styled(Avatar)`
 const UserChat = ({ id, users }) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
+
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getEmail(users, user))
   );
@@ -63,14 +77,54 @@ const UserChat = ({ id, users }) => {
     router.push(`/chat/${id}`);
   };
 
+  // Changing names of users
+  const changeName = async () => {
+    const existCondition = await db
+      .collection("chats")
+      .doc(`${id}`)
+      .collection("nickName")
+      .where("user", "==", user.displayName)
+      .get(); // Checking if nickname already exists?
+
+    if (existCondition?.empty == true) {
+      const newName = prompt("Enter Name: ");
+      if (!newName) return null;
+
+      db.collection("chats").doc(`${id}`).collection("nickName").add({
+        user: user.displayName,
+        Name: newName,
+      });
+    } else {
+      // TODO : Add overwrite feature here!
+      alert("Nick Name already exists!");
+    }
+  };
+
+  // Changing friend's name from email to Nickname
+  // Fetching nick name from firebase
+  const [nickNameSnapShot] = useCollection(
+    db
+      .collection("chats")
+      .doc(`${id}`)
+      .collection("nickName")
+      .where("user", "==", user.displayName)
+  );
+
+  const nickName = nickNameSnapShot?.docs?.[0]?.data().Name;
+
   return (
-    <Container onClick={enterChat}>
+    <Container>
+      <EditUser>
+        <Button onClick={changeName}>
+          <RateReviewIcon fontSize="large"></RateReviewIcon>
+        </Button>
+      </EditUser>
       {recipient ? (
-        <UserImage src={recipient?.photoURL}></UserImage>
+        <UserImage src={recipient?.photoURL} onClick={enterChat}></UserImage>
       ) : (
-        <UserImage>{recipientEmail[0]}</UserImage>
+        <UserImage onClick={enterChat}>{recipientEmail[0]}</UserImage>
       )}
-      <p>{recipientEmail}</p>
+      <p onClick={enterChat}>{nickName ? nickName : recipientEmail}</p>
     </Container>
   );
 };
