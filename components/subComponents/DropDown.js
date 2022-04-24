@@ -30,7 +30,7 @@ const DropDown = ({ stateChanger }) => {
   const router = useRouter();
 
   const deleteChat = async () => {
-    if (window.confirm("Do you really want to leave?")) {
+    if (window.confirm("Delete this chat from your DM?")) {
       const chatSnapShot = await db
         .collection("chats")
         .doc(router.query.id)
@@ -46,7 +46,7 @@ const DropDown = ({ stateChanger }) => {
   };
 
   const deleteUser = async () => {
-    if (window.confirm("Do you really want to leave?")) {
+    if (window.confirm("Delete this user from your DM?")) {
       // deleting messages data of user once the whole user is deleted
       const chatSnapShot = await db
         .collection("chats")
