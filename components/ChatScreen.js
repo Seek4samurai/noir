@@ -16,7 +16,7 @@ import DropDown from "./subComponents/DropDown";
 
 const Container = styled.div`
   padding-left: 1rem;
-  max-height: 100vh;
+  height: fit-content;
   overflow-y: hidden;
   @media only screen and (max-width: 840px) {
     padding: 0 0.4rem;
@@ -108,6 +108,7 @@ const Input = styled.input`
   bottom: 0;
   z-index: 100;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 4px;
+  z-index: 100;
 
   @media only screen and (max-width: 396px) {
     max-width: 396px;

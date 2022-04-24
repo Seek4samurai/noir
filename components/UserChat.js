@@ -47,6 +47,12 @@ const EditUser = styled.span`
   display: flex;
   padding-left: 3rem;
   cursor: pointer;
+  z-index: 99;
+  @media only screen and (max-width: 840px) {
+    font-size: 1rem;
+    padding-left: 2rem;
+    transform: translateY(20px);
+  }
   :hover {
     ::after {
       content: "Edit";
