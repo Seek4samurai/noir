@@ -41,15 +41,6 @@ const Sidebar = () => {
 
   return (
     <>
-      <Heading>
-        NOIR{" "}
-        <Image
-          src={noirLogo}
-          alt="noir Logo"
-          width={"30px"}
-          height={"30px"}
-        ></Image>
-      </Heading>
       <Container>
         <Header>
           <Link href="/">
@@ -105,20 +96,6 @@ const Sidebar = () => {
 export default Sidebar;
 
 // Styles here
-const Heading = styled.h2`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #303030;
-  z-index: 2;
-  @media only screen and (max-width: 840px) {
-    color: white;
-    font-size: 1.2rem;
-  }
-`;
 const Container = styled.div`
   width: 100px;
   background-color: #5e93ff;
@@ -128,8 +105,6 @@ const Container = styled.div`
   }
 `;
 const Header = styled.div`
-  position: sticky;
-  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
