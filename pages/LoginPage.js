@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { auth, provider } from "../firebase";
 import Image from "next/image";
 import Logo from "../public/icons/noir.png";
+import BgGif from "../public/BgGif.gif";
 
 const Container = styled.div`
   display: grid;
@@ -17,7 +18,9 @@ const LoginContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 100px;
+  padding: 80px;
+
+  z-index: 99;
 
   border-radius: 25px;
   background: #e7e0ff;
@@ -30,6 +33,18 @@ const TextArea = styled.div`
   font-size: 1.2rem;
   font-weight: normal;
 `;
+const BgImage = styled.div`
+  position: absolute;
+  top: 0%;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+  filter: blur(10px) saturate(0.2);
+
+  z-index: 1;
+`;
 
 const LoginPage = () => {
   const signIn = () => {
@@ -37,10 +52,14 @@ const LoginPage = () => {
   };
   return (
     <Container>
+      <BgImage>
+        <Image src={BgGif} alt="BgGif" layout="fill"></Image>
+      </BgImage>
       <Head>
         <title>Login</title>
       </Head>
       <LoginContainer>
+        <h1 style={{ color: "#444444" }}>Noir</h1>
         <div
           style={{
             width: "120px",
