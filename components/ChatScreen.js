@@ -128,7 +128,7 @@ const FooterContainer = styled.div`
   justify-content: center;
 `;
 
-const ChatScreen = ({ chat, messages }) => {
+const ChatScreen = ({ id, chat, messages }) => {
   const [menu, setMenu] = useState(false);
   const [user] = useAuthState(auth);
   const [input, setInput] = useState("");
@@ -151,12 +151,6 @@ const ChatScreen = ({ chat, messages }) => {
     }, 1000);
   }, [router.query.id]);
 
-  // filtering out the the name of active user to get the name of the other user
-  const filtered = Object.entries(chat.users).filter(
-    ([key, value]) => value != user.email
-  );
-  const userName = filtered[0][1].split("@")[0];
-
   // collection's snapshots
   const [messagesSnapShot] = useCollection(
     db
@@ -169,6 +163,20 @@ const ChatScreen = ({ chat, messages }) => {
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getEmail(chat.users, user))
   );
+
+  const recipient = recipientSnapshot?.docs?.[0]?.data();
+  const recipientEmail = getEmail(chat.users, user);
+
+  const [nickNameSnapShot] = useCollection(
+    db
+      .collection("chats")
+      .doc(`${id}`)
+      .collection("nickName")
+      .where("user", "==", user.displayName)
+  );
+
+  const nickName = nickNameSnapShot?.docs?.[0]?.data().Name;
+  const preMailName = recipientEmail.split("@")[0];
 
   const showMessages = () => {
     if (messagesSnapShot) {
@@ -214,9 +222,6 @@ const ChatScreen = ({ chat, messages }) => {
     }, 100);
   };
 
-  const recipient = recipientSnapshot?.docs?.[0]?.data();
-  const recipientEmail = getEmail(chat.users, user);
-
   return (
     <Container>
       <Header>
@@ -226,7 +231,7 @@ const ChatScreen = ({ chat, messages }) => {
           <Avatar src={recipientEmail[0]}></Avatar>
         )}
         <HeaderInformation>
-          <h4>{userName}</h4>
+          <h4>{nickName ? nickName : preMailName}</h4>
           {recipientSnapshot ? (
             <p>
               Last seen:{" "}

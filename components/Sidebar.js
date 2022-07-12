@@ -117,10 +117,11 @@ const Header = styled.div`
   width: 100%;
   z-index: 1;
   @media only screen and (max-width: 840px) {
+    background: rgb(154, 122, 255);
     background: linear-gradient(
-      0deg,
-      rgba(133, 90, 255, 1) 0%,
-      rgba(124, 218, 255, 1) 100%
+      180deg,
+      rgba(154, 122, 255, 1) 74%,
+      rgba(0, 166, 128, 1) 100%
     );
     border-radius: 0px 0px 20px 20px;
     width: 100vw;

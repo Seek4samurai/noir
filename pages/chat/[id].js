@@ -66,7 +66,7 @@ const Chat = () => {
       <Sidebar></Sidebar>
       <ChatContainer>
         {chat && messages ? (
-          <ChatScreen chat={chat} messages={messages}></ChatScreen>
+          <ChatScreen id={chat.id} chat={chat} messages={messages}></ChatScreen>
         ) : null}
       </ChatContainer>
     </Container>

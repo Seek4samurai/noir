@@ -41,7 +41,6 @@ const DropDown = ({ stateChanger }) => {
       await Promise.all(deletePromises);
 
       stateChanger(false); // hides the dropdown again after deleting
-      console.log("Documents deleted");
     }
   };
 
