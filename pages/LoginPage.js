@@ -6,6 +6,7 @@ import { auth, provider } from "../firebase";
 import Image from "next/image";
 import Logo from "../public/icons/noir.png";
 import BgGif from "../public/BgGif.gif";
+import Google from "../public/icons/Google.png";
 
 const Container = styled.div`
   display: grid;
@@ -18,16 +19,16 @@ const LoginContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px;
+  padding: 60px;
 
   z-index: 99;
 
-  border-radius: 25px;
-  background: #e7e0ff;
-  box-shadow: 7px 7px 4px #858585, -7px -7px 4px #ebebeb;
+  border-radius: 18px;
+  background: #f2e5ff;
+  box-shadow: 9px 9px 5px #7b7582, -9px -9px 5px #ffffff;
 `;
 const TextArea = styled.div`
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   color: #444444;
   text-align: center;
   font-size: 1.2rem;
@@ -59,7 +60,22 @@ const LoginPage = () => {
         <title>Login</title>
       </Head>
       <LoginContainer>
-        <h1 style={{ color: "#444444" }}>Noir</h1>
+        <div
+          style={{
+            height: "80px",
+            width: "150px",
+          }}
+        >
+          <Image src={Google} alt="Google" layout="intrinsic"></Image>
+        </div>
+        <TextArea
+          style={{
+            textAlign: "center",
+            fontSize: "1.2rem",
+          }}
+        >
+          Sign in<br></br>to continue to HeyNoir
+        </TextArea>
         <div
           style={{
             width: "120px",
@@ -70,7 +86,6 @@ const LoginPage = () => {
         >
           <Image alt="Logo" src={Logo} layout="fill" objectFit="contain" />
         </div>
-        <TextArea>Login Using Google</TextArea>
         <Button onClick={signIn} variant="outlined">
           Sign in
         </Button>
