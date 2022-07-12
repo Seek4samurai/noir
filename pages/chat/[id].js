@@ -1,12 +1,11 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import ChatScreen from "../../components/ChatScreen";
 import Sidebar from "../../components/Sidebar";
-import getEmail from "../../utils/getEmail";
 import { auth, db } from "../../firebase";
-import { useEffect, useState } from "react";
+import getEmail from "../../utils/getEmail";
 
 const Container = styled.div`
   display: flex;

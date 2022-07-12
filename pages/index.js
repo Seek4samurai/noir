@@ -62,8 +62,7 @@ export default function Home() {
           <h3>Realtime application</h3>
         </Splash>
         <Warning>
-          No talking with your girl/boyfriend here.
-          <br></br>I have access over raw data on Database :p
+          Send me a &quot;Hi&quot; at <br></br>grvrawat999@gmail.com
         </Warning>
       </Hero>
       <Footer></Footer>

@@ -13,12 +13,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-radius: 40px 40px 0px 0px;
+  border-radius: 20px 20px 20px 20px;
 
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   height: 130px;
-  min-width: 180px;
-  margin-left: 1rem;
+  /* min-width: 180px; */
+  /* margin-left: 1rem; */
 
   color: #414242;
   word-break: break-word;
@@ -28,10 +28,10 @@ const Container = styled.div`
   @media only screen and (max-width: 840px) {
     justify-content: end;
     height: 100px;
-    min-width: 130px;
-    width: 150px;
+    /* min-width: 130px; */
+    /* width: 150px; */
     padding: 0 0.4rem;
-    margin-left: 0.2rem;
+    /* margin-left: 0.2rem; */
     border-radius: 30px 30px 0px 0px;
     p {
       font-size: 0.8rem;
@@ -39,7 +39,7 @@ const Container = styled.div`
   }
 
   :hover {
-    background: #d3eeff;
+    background: #77cfba;
   }
 `;
 
@@ -52,13 +52,6 @@ const EditUser = styled.span`
     font-size: 1rem;
     padding-left: 2rem;
     transform: translateY(20px);
-  }
-  :hover {
-    ::after {
-      content: "Edit";
-      display: flex;
-      align-items: center;
-    }
   }
 `;
 const UserImage = styled(Avatar)`
@@ -117,12 +110,13 @@ const UserChat = ({ id, users }) => {
   );
 
   const nickName = nickNameSnapShot?.docs?.[0]?.data().Name;
+  const preMailName = recipientEmail.split("@");
 
   return (
     <Container>
       <EditUser>
         <Button onClick={changeName}>
-          <RateReviewIcon fontSize="large"></RateReviewIcon>
+          <RateReviewIcon fontSize="medium"></RateReviewIcon>
         </Button>
       </EditUser>
       {recipient ? (
@@ -130,7 +124,7 @@ const UserChat = ({ id, users }) => {
       ) : (
         <UserImage onClick={enterChat}>{recipientEmail[0]}</UserImage>
       )}
-      <p onClick={enterChat}>{nickName ? nickName : recipientEmail}</p>
+      <p onClick={enterChat}>{nickName ? nickName : preMailName[0]}</p>
     </Container>
   );
 };

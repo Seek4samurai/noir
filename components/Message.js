@@ -18,7 +18,7 @@ const MessageElement = styled.p`
 
 const Sender = styled(MessageElement)`
   margin-left: auto;
-  background-color: #578ffe;
+  background-color: #7f60ce;
   color: white;
 `;
 

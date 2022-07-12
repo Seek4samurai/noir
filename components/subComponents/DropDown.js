@@ -22,7 +22,7 @@ const List = styled.div`
   padding: 0.8rem;
   margin: 0.2rem;
 
-  background-color: #d2efff;
+  background-color: #e0d6ff;
   border-radius: 10px;
 `;
 

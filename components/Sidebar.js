@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import * as EmailValidator from "email-validator";
@@ -7,7 +6,6 @@ import { Avatar, Button } from "@mui/material";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import noirLogo from "../public/favicon.ico";
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
@@ -98,8 +96,14 @@ export default Sidebar;
 // Styles here
 const Container = styled.div`
   width: 100px;
-  background-color: #5e93ff;
   border-radius: 0px 50px 0px 0px;
+
+  background: rgb(154, 122, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(154, 122, 255, 1) 74%,
+    rgba(0, 166, 128, 1) 100%
+  );
   @media only screen and (max-width: 840px) {
     width: 0px;
   }

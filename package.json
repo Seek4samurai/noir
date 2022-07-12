@@ -13,7 +13,6 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
-    "better-react-spinkit": "^2.0.4",
     "email-validator": "^2.0.4",
     "firebase": "^9.6.8",
     "moment": "^2.29.1",

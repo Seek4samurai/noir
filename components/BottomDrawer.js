@@ -1,5 +1,4 @@
 import { Person } from "@mui/icons-material";
-import { Button } from "@mui/material";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -41,13 +40,6 @@ const UserContainer = styled.div`
   overflow-x: scroll;
   width: 100%;
   transition: all 0.7s;
-`;
-const SidebarButton = styled(Button)`
-  min-width: 0;
-  transition: all 0.7s;
-  :hover {
-    background-color: #d3eeff;
-  }
 `;
 
 const BottomDrawer = () => {
